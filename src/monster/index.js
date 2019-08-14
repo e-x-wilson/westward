@@ -33,8 +33,6 @@ function Monster(props) {
       }}
       style={[styles.monster, { left: props.monsterX, top: props.monsterY }]}
     >
-      {/* TODO: Set text to be dynamic based on generated monster */}
-      <Text>Rattlesnake</Text>
       <Modal
         animationType="fade"
         transparent={true}
