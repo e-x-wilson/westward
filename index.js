@@ -19,13 +19,8 @@ console.disableYellowBox = true;
 // ---------------------------------------
 
 import Monster from "./src/monster";
+import Player from "./src/player";
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
-
-const randomBetween = (min, max) =>
-  Math.floor(Math.random() * (max - min) + min);
-
-const monsterX = randomBetween(100, WIDTH - 100);
-const monsterY = randomBetween(100, HEIGHT - 100);
 
 const LEVELING = [1, 30, 90, 150];
 
@@ -37,8 +32,8 @@ const styles = StyleSheet.create({
   touch: {
     position: "absolute",
     backgroundColor: "blue",
-    width: 50,
-    height: 50,
+    width: 30,
+    height: 30,
     borderRadius: 50
   }
 });
@@ -56,6 +51,7 @@ function Westward(props) {
   useEffect(() => {
     if (params.monsterExperience) {
       addExperience(playerExperience + params.monsterExperience);
+      // TODO: Create level up modal
       setPlayerLevel(LEVELING.findIndex(cap => cap >= playerExperience) + 1);
     }
   }, [params.battleId]);
@@ -69,6 +65,7 @@ function Westward(props) {
   };
 
   return (
+    // TODO: Add MapBox basic map for background to main screen
     <GameLoop style={styles.container} onUpdate={this.updateHandler}>
       {/* TODO: Add Player component linked to player menu screen */}
       <View style={[styles.touch, { left: touchX, top: touchY }]} />
@@ -77,12 +74,10 @@ function Westward(props) {
       <Text>PLAYER LVL: {playerLevel}</Text>
       <Text>PLAYER XP: {playerExperience}</Text>
 
-      <Monster
-        monsterX={monsterX}
-        monsterY={monsterY}
-        screenWidth={WIDTH}
-        screenHeight={HEIGHT}
-      />
+      <Player screenWidth={WIDTH} screenHeight={HEIGHT} />
+
+      {/* TODO: Add monster procedural generation */}
+      <Monster screenWidth={WIDTH} screenHeight={HEIGHT} />
     </GameLoop>
   );
 }

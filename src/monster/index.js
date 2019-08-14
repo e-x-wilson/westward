@@ -6,19 +6,28 @@ import {
   Text,
   TouchableHighlight,
   TouchableOpacity,
-  Alert,
-  Image
+  Image,
+  Dimensions
 } from "react-native";
 import { withNavigation } from "react-navigation";
 
+const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
+
+const randomBetween = (min, max) =>
+  Math.floor(Math.random() * (max - min) + min);
+
+const monsterX = randomBetween(100, WIDTH - 100);
+const monsterY = randomBetween(100, HEIGHT - 100);
+
 const MONSTER_INFO = {
-  NAME: `Snake`,
+  NAME: `snake`,
   LEVEL: 2,
   HEALTH: 10,
   ATTACK: 3,
   DEFENSE: 1,
   XP: 8,
-  SPEED: 2
+  SPEED: 2,
+  MAP_POSITION: [monsterX, monsterY]
 };
 
 function Monster(props) {
@@ -33,7 +42,13 @@ function Monster(props) {
         setModalText(`${MONSTER_INFO.NAME} - Lv. ${MONSTER_INFO.LEVEL}`);
         setModalVisible(true);
       }}
-      style={[styles.monster, { left: props.monsterX, top: props.monsterY }]}
+      style={[
+        styles.monster,
+        {
+          left: MONSTER_INFO.MAP_POSITION[0],
+          top: MONSTER_INFO.MAP_POSITION[1]
+        }
+      ]}
     >
       <Modal
         animationType="fade"
@@ -66,8 +81,8 @@ function Monster(props) {
             </TouchableHighlight>
             <TouchableHighlight
               onPress={() => {
-                props.navigation.navigate(`fight`, MONSTER_INFO);
                 setModalVisible(false);
+                props.navigation.navigate(`fight`, MONSTER_INFO);
               }}
               style={styles.fightButton}
             >
@@ -84,8 +99,8 @@ const styles = StyleSheet.create({
   monster: {
     position: "absolute",
     backgroundColor: "black",
-    width: 50,
-    height: 50
+    width: 30,
+    height: 30
   },
   monsterModalView: {
     backgroundColor: `rgba(47, 47, 47, 0.6)`,
