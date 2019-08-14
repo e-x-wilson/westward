@@ -132,7 +132,8 @@ const AppNavigator = createStackNavigator(
     fight: Fight
   },
   {
-    initialRouteName: "home"
+    initialRouteName: "home",
+    headerMode: "none"
   }
 );
 
