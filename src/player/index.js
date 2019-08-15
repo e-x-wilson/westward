@@ -7,39 +7,28 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   Alert,
-  Image
+  Image,
+  Dimensions
 } from "react-native";
 import { withNavigation } from "react-navigation";
 
 import MenuIcon from "./menu-icon";
+import { WIDTH, HEIGHT, PLAYER_INFO, MENU_ICONS } from "../constants.js";
 
-const PLAYER_CLASSES = {
-  BANDIT: `Bandit`,
-  GUNSLINGER: `Gunslinger`,
-  DOCTOR: `Doctor`,
-  BARTENDER: `Bartender`,
-  PASTOR: `Pastor`
-};
-
-const PLAYER_INFO = {
-  NAME: `Eri of Rilson`,
-  CLASS: PLAYER_CLASSES.BANDIT,
-  LEVEL: 2,
-  HEALTH: 10,
-  ATTACK: 5,
-  DEFENSE: 1,
-  SPEED: 4
-};
-
-const MENU_ICONS = [
-  `inventory`,
-  `stats`,
-  `skills`,
-  `party`,
-  `story`,
-  `achievements`,
-  `close`
-];
+const styles = StyleSheet.create({
+  playerSprite: {
+    width: 50,
+    height: 50
+  },
+  playerMenu: {
+    backgroundColor: `rgba(47, 47, 47, 0.9)`,
+    alignItems: `flex-end`,
+    justifyContent: `flex-end`,
+    padding: 60,
+    width: WIDTH,
+    height: HEIGHT
+  }
+});
 
 function Player(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -50,15 +39,9 @@ function Player(props) {
       onPress={() => {
         setModalVisible(true);
       }}
-      style={{
-        left: props.screenWidth / 2.35,
-        top: props.screenHeight / 3,
-        height: 100,
-        width: 100
-      }}
+      style={styles.playerSprite}
     >
       <Image style={styles.playerSprite} source={require(`./img/bandit.png`)} />
-      <Text style={{ top: 65, left: -5 }}>{PLAYER_INFO.NAME}</Text>
       <Modal
         animationType="fade"
         transparent={true}
@@ -70,12 +53,7 @@ function Player(props) {
             setModalVisible(false);
           }}
         >
-          <View
-            style={[
-              styles.playerMenu,
-              { width: props.screenWidth, height: props.screenHeight }
-            ]}
-          >
+          <View style={styles.playerMenu}>
             {/* TODO: Make image dynamic based on player class */}
             {MENU_ICONS.map(option => (
               <MenuIcon
@@ -89,19 +67,5 @@ function Player(props) {
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  playerSprite: {
-    position: "absolute",
-    width: 60,
-    height: 60
-  },
-  playerMenu: {
-    backgroundColor: `rgba(47, 47, 47, 0.9)`,
-    alignItems: `center`,
-    justifyContent: `center`,
-    padding: 20
-  }
-});
 
 export default withNavigation(Player);

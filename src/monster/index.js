@@ -11,24 +11,26 @@ import {
 } from "react-native";
 import { withNavigation } from "react-navigation";
 
-const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
+import { WIDTH, HEIGHT, MONSTER_INFO } from "../constants.js";
 
-const randomBetween = (min, max) =>
-  Math.floor(Math.random() * (max - min) + min);
-
-const monsterX = randomBetween(100, WIDTH - 100);
-const monsterY = randomBetween(100, HEIGHT - 100);
-
-const MONSTER_INFO = {
-  NAME: `snake`,
-  LEVEL: 2,
-  HEALTH: 10,
-  ATTACK: 3,
-  DEFENSE: 1,
-  XP: 8,
-  SPEED: 2,
-  MAP_POSITION: [monsterX, monsterY]
-};
+const styles = StyleSheet.create({
+  monsterSprite: {
+    width: 40,
+    height: 40
+  },
+  monsterModalView: {
+    backgroundColor: `rgba(47, 47, 47, 0.6)`,
+    alignItems: `center` ,
+    justifyContent: `center`,
+    width: WIDTH,
+    height: HEIGHT
+  },
+  monsterModalText: { color: `white`, fontSize: 20 },
+  fightButton: {
+    backgroundColor: `darkgreen`,
+    padding: 10
+  }
+});
 
 function Monster(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -39,17 +41,16 @@ function Monster(props) {
       activeOpacity={1}
       onPress={() => {
         // TODO: Set text to be dynamic based on generated monster
-        setModalText(`${MONSTER_INFO.NAME} - Lv. ${MONSTER_INFO.LEVEL}`);
+        setModalText(`${MONSTER_INFO.NAME} - lv. ${MONSTER_INFO.LEVEL}`);
         setModalVisible(true);
       }}
-      style={[
-        styles.monster,
-        {
-          left: MONSTER_INFO.MAP_POSITION[0],
-          top: MONSTER_INFO.MAP_POSITION[1]
-        }
-      ]}
+      style={{
+        position: `absolute`,
+        left: MONSTER_INFO.MAP_POSITION[0],
+        top: MONSTER_INFO.MAP_POSITION[1]
+      }}
     >
+      <Image style={styles.monsterSprite} source={require(`./img/snake.png`)} />
       <Modal
         animationType="fade"
         transparent={true}
@@ -61,12 +62,7 @@ function Monster(props) {
             setModalVisible(false);
           }}
         >
-          <View
-            style={[
-              styles.monsterModalView,
-              { width: props.screenWidth, height: props.screenHeight }
-            ]}
-          >
+          <View style={styles.monsterModalView}>
             {/* TODO: Make image dynamic based on generated monster */}
             <Image source={require(`./img/snake.png`)} />
             <Text style={styles.monsterModalText}>{modalText}</Text>
@@ -82,7 +78,9 @@ function Monster(props) {
             <TouchableHighlight
               onPress={() => {
                 setModalVisible(false);
+                // TODO: Add fight scene turn based combat
                 props.navigation.navigate(`fight`, MONSTER_INFO);
+                // props.navigation.navigate(`victory`, MONSTER_INFO);
               }}
               style={styles.fightButton}
             >
@@ -94,26 +92,5 @@ function Monster(props) {
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  monster: {
-    position: "absolute",
-    backgroundColor: "black",
-    width: 30,
-    height: 30
-  },
-  monsterModalView: {
-    backgroundColor: `rgba(47, 47, 47, 0.6)`,
-    alignItems: `center`,
-    justifyContent: `center`,
-    padding: 20
-  },
-  monsterModalText: { color: `white`, fontSize: 20 },
-  fightButton: {
-    alignItems: `center`,
-    backgroundColor: `darkgreen`,
-    padding: 10
-  }
-});
 
 export default withNavigation(Monster);

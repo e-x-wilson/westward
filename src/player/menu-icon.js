@@ -24,11 +24,11 @@ function MenuIcon(props) {
 
 const styles = StyleSheet.create({
   icon: {
-    padding: 10,
-    width: 100
+    flex: 1,
   },
   iconText: {
-    color: `white`
+    color: `white`,
+    fontSize: 20
   }
 });
 

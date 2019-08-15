@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "westernRPG-tvOS.app"
-               BlueprintName = "westernRPG-tvOS"
-               ReferencedContainer = "container:westernRPG.xcodeproj">
+               BuildableName = "westward-tvOS.app"
+               BlueprintName = "westward-tvOS"
+               ReferencedContainer = "container:westward.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "westernRPG-tvOSTests.xctest"
-               BlueprintName = "westernRPG-tvOSTests"
-               ReferencedContainer = "container:westernRPG.xcodeproj">
+               BuildableName = "westward-tvOSTests.xctest"
+               BlueprintName = "westward-tvOSTests"
+               ReferencedContainer = "container:westward.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "westernRPG-tvOSTests.xctest"
-               BlueprintName = "westernRPG-tvOSTests"
-               ReferencedContainer = "container:westernRPG.xcodeproj">
+               BuildableName = "westward-tvOSTests.xctest"
+               BlueprintName = "westward-tvOSTests"
+               ReferencedContainer = "container:westward.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "westernRPG-tvOS.app"
-            BlueprintName = "westernRPG-tvOS"
-            ReferencedContainer = "container:westernRPG.xcodeproj">
+            BuildableName = "westward-tvOS.app"
+            BlueprintName = "westward-tvOS"
+            ReferencedContainer = "container:westward.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "westernRPG-tvOS.app"
-            BlueprintName = "westernRPG-tvOS"
-            ReferencedContainer = "container:westernRPG.xcodeproj">
+            BuildableName = "westward-tvOS.app"
+            BlueprintName = "westward-tvOS"
+            ReferencedContainer = "container:westward.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "westernRPG-tvOS.app"
-            BlueprintName = "westernRPG-tvOS"
-            ReferencedContainer = "container:westernRPG.xcodeproj">
+            BuildableName = "westward-tvOS.app"
+            BlueprintName = "westward-tvOS"
+            ReferencedContainer = "container:westward.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -2,51 +2,46 @@ import React, { useState, useEffect } from "react";
 import {
   AppRegistry,
   StyleSheet,
-  Dimensions,
   View,
   YellowBox,
-  Modal,
   Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  Alert
+  TouchableOpacity
 } from "react-native";
 import { GameLoop } from "react-native-game-engine";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-// THIS DISABLES EVERY YELLOW WARNING ----
-console.disableYellowBox = true;
-// ---------------------------------------
-
 import Monster from "./src/monster";
 import Player from "./src/player";
-const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
+import Fight from "./src/fight";
+import Victory from "./src/victory";
+import { WIDTH, HEIGHT, LEVELING } from "./src/constants.js";
 
-const LEVELING = [1, 30, 90, 150];
+// DISABLE EVERY YELLOW WARNING ----
+console.disableYellowBox = true;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF"
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    justifyContent: "center"
   },
   touch: {
     position: "absolute",
     backgroundColor: "blue",
-    width: 30,
-    height: 30,
+    width: 20,
+    height: 20,
     borderRadius: 50
+  },
+  player: {
+    height: 200,
+    width: 200
   }
 });
 
-function Westward(props) {
+// TODO: Create loading/auth screen as entryway to app
+function World(props) {
   const params = props.navigation.state.params || {};
-
-  const [touchX, setTouchX] = useState(WIDTH / 2 - 50);
-  const [touchY, setTouchY] = useState(HEIGHT / 2 - 50);
-
-  // TODO: Determine persistent data management solution
-  const [playerExperience, addExperience] = useState(0);
-  const [playerLevel, setPlayerLevel] = useState(1);
 
   useEffect(() => {
     if (params.monsterExperience) {
@@ -56,25 +51,34 @@ function Westward(props) {
     }
   }, [params.battleId]);
 
+  const [touchX, setTouchX] = useState(WIDTH / 2);
+  const [touchY, setTouchY] = useState(HEIGHT / 2);
+
+  // TODO: Determine persistent data management solution
+  const [playerExperience, addExperience] = useState(0);
+  const [playerLevel, setPlayerLevel] = useState(1);
+
   updateHandler = ({ touches, screen, time }) => {
     let touch = touches.find(x => x.type === "press");
     if (touch) {
-      setTouchX(touch.event.locationX);
-      setTouchY(touch.event.locationY);
+      setTouchX(touch.event.locationX - 12);
+      setTouchY(touch.event.locationY - 12);
     }
   };
 
   return (
     // TODO: Add MapBox basic map for background to main screen
     <GameLoop style={styles.container} onUpdate={this.updateHandler}>
-      {/* TODO: Add Player component linked to player menu screen */}
       <View style={[styles.touch, { left: touchX, top: touchY }]} />
+      {/* TODO: Build basic stats UI */}
 
-      {/* TODO: Replace this info with basic stats UI */}
-      <Text>PLAYER LVL: {playerLevel}</Text>
-      <Text>PLAYER XP: {playerExperience}</Text>
-
-      <Player screenWidth={WIDTH} screenHeight={HEIGHT} />
+      <Player
+        screenWidth={WIDTH}
+        screenHeight={HEIGHT}
+        style={styles.player}
+        playerLevel={playerLevel}
+        playerExperience={playerExperience}
+      />
 
       {/* TODO: Add monster procedural generation */}
       <Monster screenWidth={WIDTH} screenHeight={HEIGHT} />
@@ -82,56 +86,21 @@ function Westward(props) {
   );
 }
 
-function Fight(props) {
-  const monsterName = props.navigation.getParam("NAME", "???");
-  const monsterLevel = props.navigation.getParam("LEVEL", "???");
-  const monsterExperience = props.navigation.getParam("XP", "???");
-
-  // The following can be used if fallbacks are not desired for params.
-  // Params will be NULL if not found.
-  // const {NAME, LEVEL, EXP} = this.props.navigation.state.params
-
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>NAME: {monsterName}</Text>
-      <Text>LVL: {monsterLevel}</Text>
-      <Text>XP: {monsterExperience}</Text>
-
-      <TouchableHighlight
-        activeOpacity={0}
-        onPress={() =>
-          props.navigation.navigate("home", {
-            // TODO: Implement fighting parties and calculate total XP and kills
-            monsterExperience,
-            kills: 1,
-            // TODO: Generate random number for battle id to change or use actual
-            // state management to handle updating root reducer for player info
-            battleId: Math.random()
-          })
-        }
-        style={{
-          alignItems: "center",
-          padding: 10,
-          margin: 30
-        }}
-      >
-        <Text>Back to Map</Text>
-      </TouchableHighlight>
-    </View>
-  );
-}
-
+// TODO: Determine best sub-navigation stacks.
+// For example: World would be related to menus
+// Battle would only be related to battle menu
 const AppNavigator = createStackNavigator(
   {
-    home: Westward,
+    world: World,
+    victory: Victory,
     fight: Fight
   },
   {
-    initialRouteName: "home",
+    initialRouteName: "world",
     headerMode: "none"
   }
 );
 
-AppRegistry.registerComponent("westernRPG", () =>
+AppRegistry.registerComponent("westward", () =>
   createAppContainer(AppNavigator)
 );
