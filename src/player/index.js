@@ -16,12 +16,16 @@ import MenuIcon from "./menu-icon";
 import { WIDTH, HEIGHT, PLAYER_INFO, MENU_ICONS } from "../constants.js";
 
 const styles = StyleSheet.create({
-  playerSprite: {
-    width: 50,
-    height: 50
+  container: {
+    width: 60,
+    height: 60
+  },
+  sprite: {
+    width: 60,
+    height: 60
   },
   playerMenu: {
-    backgroundColor: `rgba(47, 47, 47, 0.9)`,
+    backgroundColor: `rgba(47, 47, 47, 0.8)`,
     alignItems: `flex-end`,
     justifyContent: `flex-end`,
     padding: 60,
@@ -39,9 +43,9 @@ function Player(props) {
       onPress={() => {
         setModalVisible(true);
       }}
-      style={styles.playerSprite}
+      style={styles.container}
     >
-      <Image style={styles.playerSprite} source={require(`./img/bandit.png`)} />
+      <Image style={styles.sprite} source={require(`./img/doctor.png`)} />
       <Modal
         animationType="fade"
         transparent={true}

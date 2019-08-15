@@ -1,12 +1,13 @@
 import React from "react";
-import { Text, TouchableHighlight, Alert, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, Alert, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
 
 function MenuIcon(props) {
   return (
-    <TouchableHighlight
+    <TouchableOpacity
+      activeOpacity={1}
       onPress={() => {
-        if (props.icon !== `close`) {
+        if (props.icon !== `Close`) {
           Alert.alert(`${props.icon} screen...`);
         }
         props.closeModal();
@@ -18,13 +19,13 @@ function MenuIcon(props) {
     >
       {/* TODO: Add icons for player menu systems */}
       <Text style={styles.iconText}>{props.icon}</Text>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   icon: {
-    flex: 1,
+    flex: 1
   },
   iconText: {
     color: `white`,

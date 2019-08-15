@@ -14,21 +14,37 @@ import { withNavigation } from "react-navigation";
 import { WIDTH, HEIGHT, MONSTER_INFO } from "../constants.js";
 
 const styles = StyleSheet.create({
-  monsterSprite: {
+  sprite: {
     width: 40,
     height: 40
   },
-  monsterModalView: {
-    backgroundColor: `rgba(47, 47, 47, 0.6)`,
-    alignItems: `center` ,
+  modal: {
+    backgroundColor: `rgba(47, 47, 47, 0.8)`,
+    alignItems: `center`,
     justifyContent: `center`,
     width: WIDTH,
     height: HEIGHT
   },
-  monsterModalText: { color: `white`, fontSize: 20 },
-  fightButton: {
+  menu: {
+    display: `flex`,
+    flexDirection: `row`,
+    alignItems: `center`,
+    alignContent: `space-around`,
+    margin: 20
+  },
+  text: { color: `white`, fontSize: 20 },
+  button: {
     backgroundColor: `darkgreen`,
-    padding: 10
+    padding: 10,
+    width: 100,
+    height: 50,
+    alignItems: `center`
+  },
+  opacity: {
+    padding: 10,
+    width: 100,
+    height: 50,
+    alignItems: `center`
   }
 });
 
@@ -50,7 +66,7 @@ function Monster(props) {
         top: MONSTER_INFO.MAP_POSITION[1]
       }}
     >
-      <Image style={styles.monsterSprite} source={require(`./img/snake.png`)} />
+      <Image style={styles.sprite} source={require(`./img/snake.png`)} />
       <Modal
         animationType="fade"
         transparent={true}
@@ -62,30 +78,27 @@ function Monster(props) {
             setModalVisible(false);
           }}
         >
-          <View style={styles.monsterModalView}>
+          <View style={styles.modal}>
             {/* TODO: Make image dynamic based on generated monster */}
             <Image source={require(`./img/snake.png`)} />
-            <Text style={styles.monsterModalText}>{modalText}</Text>
-            <TouchableHighlight
-              onPress={() => setModalVisible(false)}
-              style={{
-                alignItems: "center",
-                padding: 10
-              }}
-            >
-              <Text style={styles.monsterModalText}>Ignore</Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              onPress={() => {
-                setModalVisible(false);
-                // TODO: Add fight scene turn based combat
-                props.navigation.navigate(`fight`, MONSTER_INFO);
-                // props.navigation.navigate(`victory`, MONSTER_INFO);
-              }}
-              style={styles.fightButton}
-            >
-              <Text style={styles.monsterModalText}>Fight</Text>
-            </TouchableHighlight>
+            <Text style={styles.text}>{modalText}</Text>
+            <View style={styles.menu}>
+              <TouchableHighlight
+                onPress={() => setModalVisible(false)}
+                style={styles.opacity}
+              >
+                <Text style={styles.text}>Ignore</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                onPress={() => {
+                  setModalVisible(false);
+                  props.navigation.navigate(`Fight`, MONSTER_INFO);
+                }}
+                style={styles.button}
+              >
+                <Text style={styles.text}>Fight</Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </TouchableOpacity>
       </Modal>

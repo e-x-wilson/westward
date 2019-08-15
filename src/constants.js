@@ -42,11 +42,11 @@ export const MONSTER_INFO = {
 };
 
 export const MENU_ICONS = [
-  `inventory`,
-  `stats`,
-  `skills`,
-  `party`,
-  `story`,
-  `achievements`,
-  `close`
+  `Inventory`,
+  `Stats`,
+  `Skills`,
+  `Party`,
+  `Story`,
+  `Achievements`,
+  `Close`
 ];

@@ -2,6 +2,22 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, TouchableHighlight } from "react-native";
 import { withNavigation } from "react-navigation";
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: `center`,
+    justifyContent: `center`
+  },
+  button: {
+    backgroundColor: `black`,
+    padding: 10,
+    margin: 30
+  },
+  text: {
+    color: `white`
+  }
+});
+
 function Victory(props) {
   // Params will be NULL if not found.
   const { NAME, LEVEL, XP, SPEED } = props.navigation.state.params;
@@ -20,7 +36,7 @@ function Victory(props) {
       <TouchableHighlight
         activeOpacity={0}
         onPress={() =>
-          props.navigation.navigate("world", {
+          props.navigation.navigate("World", {
             // TODO: Implement fighting parties and calculate total XP and kills
             XP,
             kills: 1,
@@ -29,25 +45,12 @@ function Victory(props) {
             battleId: Math.random()
           })
         }
-        style={styles.worldButton}
+        style={styles.button}
       >
-        <Text>Back to Map</Text>
+        <Text style={styles.text}>Back to Map</Text>
       </TouchableHighlight>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  worldButton: {
-    alignItems: "center",
-    padding: 10,
-    margin: 30
-  }
-});
 
 export default withNavigation(Victory);
