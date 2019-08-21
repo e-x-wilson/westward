@@ -23,9 +23,24 @@ export const PLAYER_INFO = {
   CLASS: PLAYER_CLASSES.BANDIT,
   LEVEL: 2,
   HEALTH: 10,
-  ATTACK: 5,
-  DEFENSE: 1,
-  SPEED: 4
+  ENERGY: 10,
+  STATS: {
+    POWER: 5,
+    GRIT: 2,
+    SPEED: 6,
+    LOGIC: 5,
+    CHARISMA: 3,
+    MEDICINE: 1,
+    AIM: 7,
+    FAITH: 3,
+    SURVIVAL: 8,
+    CHEMISTRY: 3,
+    COURAGE: 6,
+    AUTHORITY: 0,
+    CREATIVITY: 5,
+    INTIMIDATION: 7
+  },
+  SKILL: []
 };
 
 export const LEVELING = [1, 30, 90, 150];

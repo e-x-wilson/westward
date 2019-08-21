@@ -5,6 +5,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import World from "./src/world";
 import Fight from "./src/fight";
 import Victory from "./src/victory";
+import Stats from "./src/stats";
 
 // DISABLE EVERY YELLOW WARNING ----
 console.disableYellowBox = true;
@@ -14,9 +15,12 @@ console.disableYellowBox = true;
 // Battle would only be related to battle menu
 const AppNavigator = createStackNavigator(
   {
+    // TODO: Build system where map changes once a week 
+    // to keep player environment fresh
     World,
     Victory,
-    Fight
+    Fight,
+    Stats
   },
   {
     initialRouteName: "World",

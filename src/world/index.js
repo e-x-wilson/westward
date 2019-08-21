@@ -78,6 +78,7 @@ function World(props) {
           style={styles.player}
           playerLevel={playerLevel}
           playerExperience={playerExperience}
+          menuOpen={params.menuOpen}
         />
 
         {/* TODO: Add monster procedural generation */}

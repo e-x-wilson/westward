@@ -35,7 +35,9 @@ const styles = StyleSheet.create({
 });
 
 function Player(props) {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(
+    props.menuOpen ? true : false
+  );
 
   return (
     <TouchableOpacity
