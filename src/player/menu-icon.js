@@ -7,13 +7,17 @@ function MenuIcon(props) {
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => {
-        if (props.icon !== `Close` && props.icon !== `Stats`) {
+        if (
+          props.icon !== `Close` &&
+          props.icon !== `Stats` &&
+          props.icon !== `Inventory`
+        ) {
           Alert.alert(`${props.icon} screen...`);
         }
 
         props.closeModal();
 
-        if (props.icon === `Stats`) {
+        if (props.icon === `Stats` || props.icon === `Inventory`) {
           props.navigation.navigate(props.icon);
         }
         // TODO: Create stats screen
