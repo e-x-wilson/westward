@@ -6,6 +6,7 @@ import World from "./src/world";
 import Fight from "./src/fight";
 import Victory from "./src/victory";
 import Stats from "./src/stats";
+import Inventory from "./src/inventory";
 
 // DISABLE EVERY YELLOW WARNING ----
 console.disableYellowBox = true;
@@ -20,7 +21,8 @@ const AppNavigator = createStackNavigator(
     World,
     Victory,
     Fight,
-    Stats
+    Stats,
+    Inventory
   },
   {
     initialRouteName: "World",
